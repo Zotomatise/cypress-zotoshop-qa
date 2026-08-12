@@ -1,4 +1,6 @@
 import NavigationPage from "../pages/NavigationPage";
+import CategoryPage from "../pages/CategoryPage";
+import AccountPage from "../pages/AccountPage";
 
 describe("Navigation", () => {
   beforeEach(() => {
@@ -18,7 +20,7 @@ describe("Navigation", () => {
   it("ouvre une catégorie depuis le lien de navigation", () => {
     NavigationPage.ouvrirCategorie("Smartphones");
     cy.url().should("include", "/categories/smartphones");
-    cy.get('[data-testid="category-page-title"]').should("be.visible");
+    CategoryPage.titre.should("be.visible");
   });
 
   it("ouvre la page Guide QA", () => {
@@ -29,6 +31,6 @@ describe("Navigation", () => {
   it("ouvre la page compte depuis la navigation", () => {
     NavigationPage.lienCompte.click();
     cy.url().should("include", "/account");
-    cy.get('[data-testid="login-page"]').should("be.visible");
+    AccountPage.pageConnexion.should("be.visible");
   });
 });

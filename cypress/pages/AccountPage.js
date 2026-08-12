@@ -4,6 +4,10 @@ class AccountPage {
     return this;
   }
 
+  get pageConnexion() {
+    return cy.get('[data-testid="login-page"]');
+  }
+
   get champEmail() {
     return cy.get('[data-testid="email-input"]');
   }

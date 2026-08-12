@@ -1,3 +1,5 @@
+import NavigationPage from "./NavigationPage";
+
 class ProductPage {
   visiter(slug) {
     cy.visit(`/fr/products/${slug}`);
@@ -31,6 +33,16 @@ class ProductPage {
 
   ajouterAuPanier() {
     this.boutonAjouter.click();
+    return this;
+  }
+
+  // Flux complet réutilisé par les specs panier/checkout : sélectionne les
+  // options d'une variante, ajoute au panier, attend la confirmation.
+  ajouterVarianteAuPanier(couleur, capacite) {
+    this.choisirOption(couleur);
+    this.choisirOption(capacite);
+    this.ajouterAuPanier();
+    NavigationPage.attendreArticleAjoute();
     return this;
   }
 

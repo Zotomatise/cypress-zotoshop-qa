@@ -32,6 +32,13 @@ class NavigationPage {
   compteurPanier() {
     return cy.get('[data-testid="nav-cart-link"]').invoke("text");
   }
+
+  // Le panier se met à jour de façon asynchrone (appel API) après un ajout :
+  // on attend la condition réelle (le compteur change) plutôt qu'un délai fixe.
+  attendreArticleAjoute() {
+    this.compteurPanier().should("not.eq", "Panier (0)");
+    return this;
+  }
 }
 
 export default new NavigationPage();

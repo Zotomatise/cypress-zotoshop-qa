@@ -1,7 +1,6 @@
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
-import NavigationPage from "../pages/NavigationPage";
 
 describe("Checkout", () => {
   let produits;
@@ -14,10 +13,7 @@ describe("Checkout", () => {
 
   beforeEach(() => {
     ProductPage.visiter(produits.smartphonePro.slug);
-    ProductPage.choisirOption(produits.smartphonePro.couleur);
-    ProductPage.choisirOption(produits.smartphonePro.capacite);
-    ProductPage.ajouterAuPanier();
-    NavigationPage.compteurPanier().should("not.eq", "Panier (0)");
+    ProductPage.ajouterVarianteAuPanier(produits.smartphonePro.couleur, produits.smartphonePro.capacite);
     CheckoutPage.visiter();
   });
 

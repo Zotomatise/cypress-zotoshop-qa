@@ -28,6 +28,13 @@ jobs:
       - name: Installer les dépendances
         run: npm ci
 
+      # Sur ubuntu-latest, le Firefox préinstallé est un paquet snap dont le
+      # sandbox casse le pilotage headless (Cypress ne peut pas s'y connecter
+      # en CDP/marionette). On installe un vrai binaire via cette action dédiée.
+      - name: Installer un Firefox non-snap
+        if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-firefox@v1
+
       - name: Lancer les tests Cypress (${{ matrix.browser }})
         uses: cypress-io/github-action@v6
         with:

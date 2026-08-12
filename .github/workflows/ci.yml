@@ -5,11 +5,18 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Run nocturne à 2h du matin (UTC) contre la prod, tous navigateurs
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox, edge]
     steps:
       - uses: actions/checkout@v4
 
@@ -21,16 +28,16 @@ jobs:
       - name: Installer les dépendances
         run: npm ci
 
-      - name: Lancer les tests Cypress
+      - name: Lancer les tests Cypress (${{ matrix.browser }})
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
+          browser: ${{ matrix.browser }}
 
       - name: Archiver captures d'écran (si échec)
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-screenshots
+          name: cypress-screenshots-${{ matrix.browser }}
           path: cypress/screenshots
           if-no-files-found: ignore
 
@@ -38,6 +45,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cypress-videos
+          name: cypress-videos-${{ matrix.browser }}
           path: cypress/videos
           if-no-files-found: ignore

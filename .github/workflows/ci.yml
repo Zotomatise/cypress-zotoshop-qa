@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # max-parallel: 1 — les tests tapent sur le VPS de démo ZotoShop partagé
+      # (petites ressources) : plusieurs jobs simultanés dessus peuvent le
+      # surcharger et provoquer des timeouts réseau. On sérialise les navigateurs.
+      max-parallel: 1
       matrix:
         browser: [chrome, firefox, edge]
     steps:

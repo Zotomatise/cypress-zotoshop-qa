@@ -35,6 +35,13 @@ jobs:
         if: matrix.browser == 'firefox'
         uses: browser-actions/setup-firefox@v1
 
+      # Régression connue des runners ubuntu-latest récents : AppArmor bloque
+      # les namespaces utilisateur non privilégiés, ce qui casse le sandbox de
+      # Firefox ("CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM").
+      - name: Autoriser le sandbox Firefox (namespaces non privilégiés)
+        if: matrix.browser == 'firefox'
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
       - name: Lancer les tests Cypress (${{ matrix.browser }})
         uses: cypress-io/github-action@v6
         with:

@@ -1,0 +1,14 @@
+{
+  "name": "cypress-zotoshop-qa",
+  "version": "1.0.0",
+  "description": "Suite de tests Cypress (E2E) sur ZotoShop, boutique e-commerce de démonstration",
+  "private": true,
+  "scripts": {
+    "cy:open": "cypress open",
+    "test": "cypress run",
+    "test:headed": "cypress run --headed"
+  },
+  "devDependencies": {
+    "cypress": "^13.17.0"
+  }
+}

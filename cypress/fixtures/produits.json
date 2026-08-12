@@ -1,0 +1,16 @@
+{
+  "smartphonePro": {
+    "slug": "zotophone-pro-15",
+    "nom": "ZotoPhone Pro 15",
+    "couleur": "Noir",
+    "capacite": "128Go"
+  },
+  "smartphoneLite": {
+    "slug": "zotophone-lite",
+    "nom": "ZotoPhone Lite"
+  },
+  "categorieSmartphones": {
+    "slug": "smartphones",
+    "nom": "Smartphones"
+  }
+}

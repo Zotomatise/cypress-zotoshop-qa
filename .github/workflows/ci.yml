@@ -34,6 +34,10 @@ jobs:
       - name: Installer un Firefox non-snap
         if: matrix.browser == 'firefox'
         uses: browser-actions/setup-firefox@v1
+        with:
+          # ESR (Extended Support Release) plutôt que "latest" : version stable
+          # dont le protocole marionette est éprouvé avec le driver Cypress.
+          firefox-version: latest-esr
 
       # Régression connue des runners ubuntu-latest récents : AppArmor bloque
       # les namespaces utilisateur non privilégiés, ce qui casse le sandbox de

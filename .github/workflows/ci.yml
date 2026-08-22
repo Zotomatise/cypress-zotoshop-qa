@@ -13,6 +13,9 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    # Filet de sécurité : évite qu'un blocage réseau/install (ex. mirroir apt
+    # muet) ne consomme des heures de minutes Actions avant d'échouer.
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       # max-parallel: 1 — les tests tapent sur le VPS de démo ZotoShop partagé

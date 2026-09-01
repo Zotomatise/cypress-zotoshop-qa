@@ -59,7 +59,7 @@ jobs:
           browser: ${{ matrix.browser }}
 
       - name: Archiver captures d'écran (si échec)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: cypress-screenshots-${{ matrix.browser }}
@@ -67,7 +67,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Archiver vidéos
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: cypress-videos-${{ matrix.browser }}
